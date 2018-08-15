@@ -183,8 +183,13 @@ class PDF_Invoicer extends tFPDF {
 		$this->badge = $badge;
 	}
 
-	public function set_footer_note( $note ) {
-		$this->footernote = $note;
+	function Footer() {
+
+		$this->SetY( -$this->margins['t'] );
+		$this->SetFont( $this->font, '', 8 );
+		$this->SetTextColor( 50, 50, 50 );
+		$this->MultiCell( 0, 3, $this->footernote, 0, 'C',0);
+		$this->MultiCell( 0, 10, $this->l['page'] . ' ' . $this->PageNo() . ' ' . 'of' . ' {nb}', 0, 0, 'R' );
 	}
 
 	public function render( $name = '', $destination = '' ) {
